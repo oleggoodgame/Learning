@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Оголошення Binding Data -->
+    <data>
+        <variable
+            name="user"
+            type="com.example.learning.User" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="20sp"
+        android:layout_marginTop="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/spinner2"
+        app:layout_constraintStart_toEndOf="@+id/spinner"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Button"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintEnd_toStartOf="@+id/spinner2"
+        app:layout_constraintStart_toEndOf="@+id/spinner"
+        tools:layout_editor_absoluteY="180dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:textSize="17sp"
+        android:text="@{user.name}"
+        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:textSize="15sp"
+        android:layout_marginEnd="50dp"
+        android:text="Тут мало бути @BindingAdapter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="70dp"
+            android:layout_marginBottom="100dp"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_launcher_foreground" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:layout_marginBottom="100dp"
+            android:text="Alert Dialog"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+
+<!--    Як це працює технічно:-->
+<!--    Генерується спеціальний клас. Наприклад, якщо у вас XML називається activity_main.xml, то Android генерує клас ActivityMainBinding.-->
+<!--    Прив'язка змінних. Змінні, оголошені в <data>, стають доступними для прив'язки даних у XML.-->
+<!--Автоматичне оновлення. Якщо значення змінної user змінюється, всі UI-елементи, що прив'язані до цієї змінної, оновлюються автоматично.-->
+
+<!--    Що таке <layout>?-->
+<!--Тег <layout> — це кореневий тег, який використовується в Data Binding. Він слугує обгорткою для всього XML-файлу, який включає і ваші візуальні компоненти, і оголошення змінних (даних) для прив'язки.-->
+
+<!--    Основні функції <layout>:-->
+<!--        Включення Data Binding: Якщо ви хочете використовувати Data Binding у вашій активності або фрагменті, необхідно, щоб у XML-файлі був кореневий тег <layout>. Це єдиний спосіб визначити змінні, які можна буде використовувати для прив'язки даних у XML.-->
+
+<!--            Декларація <data>: <layout> дозволяє оголошувати секцію <data>, де ви можете визначати змінні та дані, які будуть використовуватися у цьому файлі для прив'язки. Наприклад, ти оголосив змінну user типу User. Завдяки цьому ти можеш використовувати атрибути прив'язки, такі як @{user.name}, у своїх візуальних компонентах.-->
+
+<!--                Динамічна зміна даних: Data Binding дозволяє автоматично оновлювати UI на основі зміни даних без додаткового коду для оновлення компонентів вручну.-->
+
+<!--                Чому ми обгортовуємо в <layout>?-->
+<!--                    Без тега <layout> Data Binding просто не працюватиме. Всі XML-файли, які використовують Data Binding, обов'язково мають містити <layout>, щоб Android зміг розпізнати, що це файл, у якому використовується прив'язка даних.-->
